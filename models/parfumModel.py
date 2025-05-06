@@ -10,11 +10,9 @@ class ParfumBase(SQLModel):
      gender_target: str
      image_url: Optional[str] = None
 
-
+    
 class Parfum(ParfumBase, table=True):
      __tablename__ = "parfum"
-     id: Optional[int] = Field(default=None, primary_key=True)
+     id: Optional[int] = Field(default=None, primary_key=True, nullable = False)
      brand_id: int = Field(index=True, foreign_key="brand.id")
 
-class ParfumCreate(ParfumBase):
-     pass

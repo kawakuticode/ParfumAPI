@@ -21,3 +21,10 @@ DB tables created at 2025-04-02 12:01:24.
 DB tables created at 2025-04-02 12:13:01.
 DB tables created at 2025-04-03 10:14:14.
 DB tables created at 2025-04-03 11:18:09.
+Application shutdown at 2025-04-29 13:54:25.
+Application shutdown at 2025-04-29 13:54:49.
+Application shutdown at 2025-04-29 14:01:16.
+Application shutdown at 2025-04-29 14:06:18.
+Application shutdown at 2025-04-29 14:34:44.
+Application shutdown at 2025-04-29 14:44:24.
+Application shutdown at 2025-04-29 14:46:36.
