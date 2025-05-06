@@ -16,20 +16,26 @@ from data.databaseConfig import DatabaseConfig
 import traceback
 import asyncio
 import pyodbc
+import json
 
 
 
 class Main:
      def __init__(self):
         self.app = FastAPI()
+       # Load credentials from config file
+        with open("config.json", "r") as file:
+            config = json.load(file)
+        
         self.db_config = DatabaseConfig(
-       driver = '{ODBC Driver 17 for SQL Server}',                            
-       server = '',
-       port = '',
-       database = '', 
-       username = '',
-       password = ''
-   )
+            driver=config["driver"],
+            server=config["server"],
+            port=config["port"],
+            database=config["database"],
+            username=config["username"],
+            password=config["password"]
+        )
+   
         
          
         

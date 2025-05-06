@@ -1,18 +1,18 @@
-from sqlmodel import SQLModel, Field
+from sqlmodel import JSON, SQLModel, Field
+from sqlalchemy import Column
 from typing import Optional
 
 class ParfumBase(SQLModel):
-     name: str
-     brand_id: int
-     launch_year: int
-     concentration: str
-     fragance_family: str
-     gender_target: str
-     image_url: Optional[str] = None
+    name: str
+    brand_id: int
+    launch_year: int
+    concentration: str
+    fragrance_family: str
+    gender_target: str
+    image_url: Optional[str] = None
+    notes: dict = Field(default={}, sa_column=Column(JSON))
 
-    
 class Parfum(ParfumBase, table=True):
-     __tablename__ = "parfum"
-     id: Optional[int] = Field(default=None, primary_key=True, nullable = False)
-     brand_id: int = Field(index=True, foreign_key="brand.id")
-
+    __tablename__ = "parfum"
+    id: Optional[int] = Field(default=None, primary_key=True, nullable=False)
+    brand_id: int = Field(index=True, foreign_key="brand.id")

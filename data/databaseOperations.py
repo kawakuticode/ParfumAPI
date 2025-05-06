@@ -5,9 +5,11 @@ from typing import AsyncGenerator
 from contextlib import asynccontextmanager
 from sqlalchemy import text
 import logging
+import json
 
 from models.brandModel import Brand
 from models.parfumModel import Parfum
+
 logging.basicConfig()
 logging.getLogger("sqlalchemy.engine").setLevel(logging.INFO)
 
@@ -41,7 +43,7 @@ class DatabaseOperations:
                 await conn.run_sync(SQLModel.metadata.drop_all)
                 await conn.run_sync(Brand.metadata.create_all)
                 print("Database table Brand created successfully.")
-
+                # Optional: Insert sample data into the `brand` table 
                 await conn.execute(
                 text("INSERT INTO brand (name, country_origin, description, date_of_creation, url) "
                      "VALUES (:name, :country_origin, :description, :date_of_creation, :url)"),
@@ -50,23 +52,23 @@ class DatabaseOperations:
                   "date_of_creation": "1975-07-24", "url": "https://www.armani.com"}]
             )
                 print("Sample data inserted into `brand` table.")
-
+            
                 await conn.run_sync(Parfum.metadata.create_all)
-            # Optional: Insert sample data into the `parfum` table
+                print("Database table Parfum created successfully.")
+
+                notes = {
+                    "top": ["Vert de Bergamote", "Bergamot Heart (sourced from Calabria, Italy)"],
+                    "mid": ["Clary Sage Heart (from Provence, France)", "Resinoid Iris (from Morocco)"],
+                    "base": ["Tonka Bean", "Cedarwood"]
+}
+                # Optional: Insert sample data into the `parfum` table
                 await conn.execute(
-                text("INSERT INTO parfum (name, brand_id, launch_year, concentration, fragance_family, gender_target, image_url) "
-                     "VALUES (:name, :brand_id, :launch_year, :concentration, :fragance_family, :gender_target, :image_url)"),
+                text("INSERT INTO parfum (name, brand_id, launch_year, concentration, fragrance_family, gender_target, image_url , notes) "
+                     "VALUES (:name, :brand_id, :launch_year, :concentration, :fragance_family, :gender_target, :image_url, :notes)"),
                 [{"name": "Armani Code", "brand_id": 1, "launch_year": 2004,
                   "concentration": "Eau de Parfum", "fragance_family": "Woody Aromatic",
-                  "gender_target": "Male", "image_url": "https://www.armani.com"}]
-            )               
-                 
-
-              
-                
-
-      
-            
+                  "gender_target": "Male", "image_url": "https://www.armani.com" , "notes": json.dumps(notes)}]
+            )                          
             print("Sample data inserted into `parfum` table.")
         except Exception as error_db:
             print(f"An error occurred: {error_db}")
