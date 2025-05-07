@@ -26,7 +26,7 @@ class Main:
        # Load credentials from config file
         with open("config.json", "r") as file:
             config = json.load(file)
-        
+         print(config)
         self.db_config = DatabaseConfig(
             driver=config["driver"],
             server=config["server"],
