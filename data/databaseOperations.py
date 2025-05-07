@@ -92,7 +92,7 @@ class DatabaseOperations:
                   "description": "A luxury fashion house founded in 1975.",
                   "date_of_creation": "1975-07-24", "url": "https://www.armani.com"}]
             )
-                print("Sample data inserted into `brand` table.")
+                print("Sample data inserted into `brands` table.")
             
                 await conn.run_sync(Parfum.metadata.create_all)
                 print("Database table Parfums created successfully.")
@@ -110,7 +110,7 @@ class DatabaseOperations:
                   "concentration": "Eau de Parfum", "fragance_family": "Woody Aromatic",
                   "gender_target": "Male", "image_url": "https://www.armani.com" , "notes": json.dumps(notes)}]
             )                          
-            print("Sample data inserted into `parfum` table.")
+            print("Sample data inserted into `parfums` table.")
         except Exception as error_db:
             print(f"An error occurred: {error_db}")
 
