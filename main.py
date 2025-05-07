@@ -36,9 +36,6 @@ class Main:
             password=config["password"]
         )
    
-        
-         
-        
         self.db_config.check_ip()
         self.engine = self.db_config.get_engine()
         self.db_operations = DatabaseOperations(self.engine)
@@ -55,6 +52,7 @@ class Main:
         # else : 
         #    print("Unable to connect to database .... :'( !!")
      async def startup_event(self):  
+
          if await self.db_operations.connection_database_status() : 
                 await self.db_operations.create_db_and_tables()
          else :
@@ -71,14 +69,7 @@ class Main:
              status_code=500,
              content={"message": "Internal Server Error"}
          )
-     '''
-     async def add_data_to_db(self, session: AsyncSession = Depends(DatabaseOperations.get_session)):
-         async with session:
-             session.add_all(brands)
-             await session.commit()
-             session.add_all(parfums)
-             await session.commit()
-      '''
+
      
      def read_root(self):
          return {"Welcome": "Parfum data base"}
@@ -108,15 +99,6 @@ class Main:
             print(f"Error fetching parfums: {e}")
             raise HTTPException(status_code=500, detail="Failed to fetch parfums")
     
-'''
-
-     async def add_parfum(self, parfum: ParfumCreate, session: AsyncSession = Depends(DatabaseOperations.get_session)):
-         new_parfum = Parfum(name=parfum.name, brand_id=parfum.brand_id, launch_year=parfum.launch_year, concentration=parfum.concentration, fragance_family=parfum.fragance_family, gender_target=parfum.gender_target, image_url=parfum.image_url)
-         session.add(new_parfum)
-         await session.commit()
-         await session.refresh(new_parfum)
-         return new_parfum
-'''
 
 
 # Create an instance of Main and expose the app

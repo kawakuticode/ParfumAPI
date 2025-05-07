@@ -13,6 +13,6 @@ class ParfumBase(SQLModel):
     notes: dict = Field(default={}, sa_column=Column(JSON))
 
 class Parfum(ParfumBase, table=True):
-    __tablename__ = "parfum"
+    __tablename__ = "parfums"
     id: Optional[int] = Field(default=None, primary_key=True, nullable=False)
-    brand_id: int = Field(index=True, foreign_key="brand.id")
+    brand_id: int = Field(index=True, foreign_key="brands.id")

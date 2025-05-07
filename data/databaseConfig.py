@@ -92,8 +92,6 @@ class DatabaseConfig:
       f"PWD={self.password};"
    )
    
-   print(odbc_string)
    connection_url = f"mssql+aioodbc:///?odbc_connect={urllib.parse.quote_plus(odbc_string)}"
-   print (connection_url)
    return create_async_engine( connection_url, future = True,  echo = True)
  

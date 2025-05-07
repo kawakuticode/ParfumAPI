@@ -1,0 +1,5 @@
+{
+  "TestFramework": "unittest",
+  "Interpreter": "venv\\Scripts\\python.exe",
+  "SuppressPackageInstallationPrompt": true
+}
